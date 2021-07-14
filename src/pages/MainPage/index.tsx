@@ -1,11 +1,17 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 
-type MainPageProps = {};
+import Layout from '../../components/Layout';
+
+type MainPageProps = {
+  // children?: React.ReactNode,
+};
 
 function MainPage(props: MainPageProps) {
   return (
-    <div className="bg-gray-500">메인 페이지</div>
+    <Layout>
+      레이아웃 완성
+    </Layout>
   );
 }
 
