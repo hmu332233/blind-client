@@ -10,7 +10,7 @@ function PostCard({
   author,
 }: PostCardProps) {
   return (
-    <div className="shadow-lg bg-white rounded-lg px-6 py-4 mt-5 first:mt-0">
+    <div className="card mt-5 first:mt-0">
       <p>{contents}</p>
       <span className="text-sm font-bold mt-2">{author}</span>
     </div>
