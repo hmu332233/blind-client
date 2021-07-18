@@ -8,13 +8,16 @@ import {
 } from "react-router-dom";
 
 import MainPage from './pages/MainPage';
+import Layout from './components/Layout';
 
 function App() {
   return (
     <Router>
-      <Route path="/">
-        <MainPage />
-      </Route>
+      <Layout>
+        <Route path="/">
+          <MainPage />
+        </Route>
+      </Layout>
     </Router>
   );
 }
