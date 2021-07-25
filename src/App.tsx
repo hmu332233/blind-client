@@ -10,6 +10,8 @@ import {
 import MainPage from './pages/MainPage';
 import Layout from './components/Layout';
 
+import firebase from './utils/firebase';
+
 function App() {
   return (
     <Router>
