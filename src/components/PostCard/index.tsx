@@ -2,8 +2,8 @@ import React from 'react';
 
 export type PostCardProps = {
   id: string,
-  contents?: string,
-  author?: string,
+  contents: string,
+  author: string,
 };
 
 function PostCard({
