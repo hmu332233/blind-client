@@ -11,18 +11,22 @@ import MainPage from './pages/MainPage';
 import EntryPage from './pages/EntryPage';
 import Layout from './components/Layout';
 
+import { NameProvider } from './contexts/NameContext';
+
 function App() {
   return (
     <Router>
       <Layout>
-        <Switch>
-          <Route exact path="/entry">
-            <EntryPage />
-          </Route>
-          <Route exact path="/">
-            <MainPage />
-          </Route>
-        </Switch>
+        <NameProvider>
+          <Switch>
+            <Route exact path="/entry">
+              <EntryPage />
+            </Route>
+            <Route exact path="/">
+              <MainPage />
+            </Route>
+          </Switch>
+        </NameProvider>
       </Layout>
     </Router>
   );
