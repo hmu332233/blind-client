@@ -3,7 +3,7 @@ import './App.css';
 
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes,
   Route,
 } from "react-router-dom";
 
@@ -18,14 +18,10 @@ function App() {
     <Router>
       <Layout>
         <NameProvider>
-          <Switch>
-            <Route exact path="/entry">
-              <EntryPage />
-            </Route>
-            <Route exact path="/">
-              <MainPage />
-            </Route>
-          </Switch>
+          <Routes>
+            <Route path="/entry" element={<EntryPage />} />
+            <Route path="/" element={<MainPage />} />
+          </Routes>
         </NameProvider>
       </Layout>
     </Router>

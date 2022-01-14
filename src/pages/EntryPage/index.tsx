@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { NameSetContext } from '../../contexts/NameContext';
 
 type EntryPageProps = {};
 
 function EntryPage(props: EntryPageProps) {
-  const history = useHistory();
+  const navigate = useNavigate();
   const setName = useContext(NameSetContext);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -16,7 +16,7 @@ function EntryPage(props: EntryPageProps) {
     const { name } = Object.fromEntries(formData);
 
     setName(name);
-    history.push('/');
+    navigate('/');
 
     e.currentTarget.reset();
   };
