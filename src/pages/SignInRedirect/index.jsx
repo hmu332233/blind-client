@@ -5,7 +5,7 @@ import { isSignInWithEmailLink, signInWithEmailLink } from 'firebase/auth';
 
 function SignInRedirect() {
   useEffect(() => {
-    // 로그인 이메일 링크인지 체크
+    // 이메일 링크를 사용한 로그인 링크인지 확인
     if (isSignInWithEmailLink(auth, window.location.href)) {
       // Additional state parameters can also be passed via URL.
       // This can be used to continue the user's intended action before triggering
@@ -28,6 +28,9 @@ function SignInRedirect() {
           // result.additionalUserInfo.profile == null
           // You can check if the user is new or existing:
           // result.additionalUserInfo.isNewUser
+
+          // TODO: 로그인이 완료되었다고. 본래 페이지로 돌아가라고 하기
+          alert('로그인이 완료되었습니다. 본래 페이지로 돌아가세요!');
         })
         .catch((error) => {
           // Some error occurred, you can inspect the code: error.code
