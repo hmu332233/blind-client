@@ -3,15 +3,12 @@ to: src/components/<%= name %>/index.tsx
 ---
 import React from 'react';
 
-type <%= name %>Props = {};
+type Props = {};
 
-function <%= name %>(props: <%= name %>Props) {
+function <%= name %>(props: Props) {
   return (
     <div></div>
   );
 }
-
-<%= name %>.defaultProps = {
-};
 
 export default <%= name %>;
