@@ -1,6 +1,6 @@
 import React, { useState, createContext, useEffect } from 'react';
 
-import { app, auth } from '../utils/firebase';
+import { app, auth } from '../utils/firebase/firebase';
 import { getAuth, onAuthStateChanged, signOut, sendSignInLinkToEmail } from 'firebase/auth';
 
 const actionCodeSettings = {
@@ -16,11 +16,12 @@ type AuthActionType = {
   signout: () => void;
 };
 
-export const AuthStateContext = createContext<any>(null!); // TODO: user type 추가하기
+export const AuthStateContext = createContext<User>(null!);
 export const AuthActionContext = createContext<AuthActionType>(null!);
 
 type AuthProviderProps = { children: React.ReactNode };
 export function AuthProvider({ children }: AuthProviderProps) {
+  const [init, setInit] = useState(false);
   const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
@@ -28,18 +29,19 @@ export function AuthProvider({ children }: AuthProviderProps) {
       console.log(firebaseUser);
       if (firebaseUser) {
         const user = {
-          uid: firebaseUser.uid,
+          id: firebaseUser.uid,
           displayName: firebaseUser.displayName,
         };
         setUser(user);
       } else {
         setUser(null);
       }
+      setInit(true);
     });
     return unsubscribe;
   }, []);
 
-  const signin = (email: string = 'hmu332233@gmail.com') => {
+  const signin = (email: string) => {
     sendSignInLinkToEmail(auth, email, actionCodeSettings)
     .then(() => {
       // The link was successfully sent. Inform the user.
@@ -60,6 +62,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
   };
 
   const action = { signin, signout };
+
+
+  if (!init) {
+    return <div>로딩 중...</div>
+  }
 
   return (
     <AuthActionContext.Provider value={action}>
