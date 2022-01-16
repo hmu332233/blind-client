@@ -1,13 +1,13 @@
 import React, { useRef, useEffect } from 'react';
-import PostCard, { PostCardProps } from '../PostCard';
+import PostCard from '../PostCard';
 import classNames from 'classnames';
 
 
-type PostCardListProps = {
-  posts: Array<PostCardProps>,
+type Props = {
+  posts: Array<Post>,
 };
 
-function PostCardList({ posts }: PostCardListProps) {
+function PostCardList({ posts }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (ref.current) {
@@ -21,7 +21,7 @@ function PostCardList({ posts }: PostCardListProps) {
   return (
     <div className={'mb-16 py-4 -my-4 -mx-2 px-2 overflow-y-auto min-h-4/5 max-h-700px'} ref={ref}>
       {posts.map(post => (
-        <PostCard key={post.id} {...post} />
+        <PostCard key={post.id} post={post} />
       ))}
     </div>
   );

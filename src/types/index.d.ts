@@ -7,6 +7,6 @@ type Post = {
 }
 
 type User = {
-  uid: string,
+  id: string,
   displayName?: string,
 };

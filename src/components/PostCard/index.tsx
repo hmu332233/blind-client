@@ -1,20 +1,17 @@
 import React from 'react';
 
-export type PostCardProps = {
-  id: string,
-  contents: string,
-  author: string,
+type Props = {
+  post: Post
 };
 
 function PostCard({
-  id,
-  contents,
-  author,
-}: PostCardProps) {
+  post,
+}: Props) {
+  const { id, contents, creatorName } = post;
   return (
     <div className="card mt-5 first:mt-0" id={id}>
       <p>{contents}</p>
-      <span className="text-sm font-bold mt-2">{author}</span>
+      <span className="text-sm font-bold mt-2">{creatorName}</span>
     </div>
   );
 }
