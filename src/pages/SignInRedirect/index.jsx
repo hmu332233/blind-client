@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { auth } from '../../utils/firebase';
+import { auth } from '../../utils/firebase/firebase';
 import { isSignInWithEmailLink, signInWithEmailLink } from 'firebase/auth';
 
 function SignInRedirect() {

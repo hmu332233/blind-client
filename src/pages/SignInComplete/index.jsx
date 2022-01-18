@@ -1,7 +1,4 @@
-import React, { useContext, useEffect } from 'react';
-
-import { auth } from '../../utils/firebase';
-import { isSignInWithEmailLink, signInWithEmailLink } from 'firebase/auth';
+import React, { useContext } from 'react';
 
 import { useLocation, Navigate } from 'react-router-dom';
 import { AuthStateContext } from '../../contexts/AuthContext';
