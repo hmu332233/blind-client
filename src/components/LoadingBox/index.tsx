@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
+import classNames from 'classnames';
+
 type Props = {
   className: string,
   children: JSX.Element,
@@ -22,12 +24,14 @@ function LoadingBox({ className, children, onBottom }: Props) {
 
     observer.observe(bottomRef.current);
     return () => observer.disconnect();
-  }, [bottomRef.current]);
+  }, [onBottom]);
 
   return (
-    <div className={className}>
+    <div className={classNames(className)}>
       {children}
-      <div className="animate-spin w-12 h-12 border-t-4 border-gray-400 rounded-full" ref={bottomRef} />
+      <div className="flex justify-center mt-6">
+        <div className="animate-spin w-12 h-12 border-t-4 border-gray-400 rounded-full" ref={bottomRef} />
+      </div>
     </div>
   );
 }
