@@ -39,7 +39,7 @@ function MainPage() {
     const posts: Post[] = snapshot.docs.map(doc => doc.data());
     setPosts(originPosts => [...originPosts, ...posts]);
     setIsLast(snapshot.docs.length === 0);
-    
+
     lastPostSnapshot.current = snapshot.docs[snapshot.docs.length - 1];
   }
 
@@ -50,7 +50,7 @@ function MainPage() {
   return (
     <div>
       <button onClick={signout}>로그아웃</button>
-      <LoadingBox className="mb-16" onBottom={handleBottom}>
+      <LoadingBox className="mb-16" onBottom={handleBottom} hideLoading={isLast}>
         <PostCardList posts={posts} />
       </LoadingBox>
       <PostInput onSubmit={handleSubmit} />

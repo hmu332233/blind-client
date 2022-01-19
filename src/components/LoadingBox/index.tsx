@@ -6,10 +6,11 @@ type Props = {
   className: string,
   children: JSX.Element,
   onBottom: () => void,
+  hideLoading: boolean,
 };
 
 
-function LoadingBox({ className, children, onBottom }: Props) {
+function LoadingBox({ className, children, onBottom, hideLoading }: Props) {
   const bottomRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!bottomRef.current) {
@@ -29,9 +30,11 @@ function LoadingBox({ className, children, onBottom }: Props) {
   return (
     <div className={classNames(className)}>
       {children}
-      <div className="flex justify-center mt-6">
-        <div className="animate-spin w-12 h-12 border-t-4 border-gray-400 rounded-full" ref={bottomRef} />
-      </div>
+      {!hideLoading && (
+        <div className="flex justify-center mt-6">
+          <div className="animate-spin w-12 h-12 border-t-4 border-gray-400 rounded-full" ref={bottomRef} />
+        </div>
+      )}
     </div>
   );
 }
