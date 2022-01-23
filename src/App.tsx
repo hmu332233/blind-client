@@ -30,8 +30,8 @@ function App() {
             />
             <Route path="/signin" element={<SignInPage />} />
             <Route path="/signin/complete" element={<SignInComplete />} />
-          </Route>
             <Route path="/signin/redirect" element={<SignInRedirect />} />
+          </Route>
           {/* <Route path="*" element={<NoMatch />} /> */}
         </Routes>
       </AuthProvider>

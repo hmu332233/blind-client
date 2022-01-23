@@ -13,9 +13,9 @@ function SignInComplete() {
   }
 
   return (
-    <div>
-      이메일 링크 로그인 진행 중입니다.<br />
-      이메일을 확인해주세요
+    <div className="text-center">
+      인증 확인 메일을 보냈습니다.<br />
+      이메일을 확인해주세요!
     </div>
   );
 }

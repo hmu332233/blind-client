@@ -4,8 +4,8 @@ import { auth } from '../../utils/firebase/firebase';
 import { isSignInWithEmailLink, signInWithEmailLink } from 'firebase/auth';
 
 const STEP_TEXT = {
-  PENDING: '로그인 중..',
-  COMPLETE: '로그인이 완료되었습니다. 이 페이지는 닫아주세요.'
+  PENDING: <>로그인 중..</>,
+  COMPLETE: <>로그인이 완료되었습니다!<br />이 페이지는 닫고 기존 페이지로 돌아가주세요.</>
 } as const;
 
 type Step = keyof typeof STEP_TEXT;
