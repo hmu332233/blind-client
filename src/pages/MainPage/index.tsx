@@ -32,8 +32,6 @@ function MainPage() {
   };
 
   const getPosts = async () => {
-    console.log('getPosts!')
-  
     const q = lastPostSnapshot.current ? query(postsRef, orderBy('createdAt', 'desc'), startAfter(lastPostSnapshot.current), limit(10)) : query(postsRef, orderBy('createdAt', 'desc'), limit(10));
     const snapshot = await getDocs(q);
     const posts: Post[] = snapshot.docs.map(doc => doc.data());

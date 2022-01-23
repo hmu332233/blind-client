@@ -28,7 +28,7 @@ function PostInput({ onSubmit }: PostInputProps) {
   };
 
   useEffect(() => {
-    setIsButtonShown(!!text);
+    setIsButtonShown(Boolean(text));
   }, [text])
 
   return (
