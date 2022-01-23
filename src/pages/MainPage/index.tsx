@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 
 import PostCardList from '../../components/PostCardList';
 import PostInput from '../../components/PostInput';

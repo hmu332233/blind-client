@@ -1,7 +1,7 @@
 import React, { useState, createContext, useEffect } from 'react';
 
-import { app, auth } from '../utils/firebase/firebase';
-import { getAuth, onAuthStateChanged, signOut, sendSignInLinkToEmail } from 'firebase/auth';
+import { auth } from '../utils/firebase/firebase';
+import { onAuthStateChanged, signOut, sendSignInLinkToEmail } from 'firebase/auth';
 
 const actionCodeSettings = {
   // URL you want to redirect back to. The domain (www.example.com) for this
@@ -51,8 +51,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
       // ...
     })
     .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
+      // const errorCode = error.code;
+      // const errorMessage = error.message;
       // ...
     });
   };
