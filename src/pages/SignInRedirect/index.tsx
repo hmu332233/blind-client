@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { auth } from '../../utils/firebase/firebase';
 import { isSignInWithEmailLink, signInWithEmailLink } from 'firebase/auth';
@@ -11,6 +12,7 @@ const STEP_TEXT = {
 type Step = keyof typeof STEP_TEXT;
 
 function SignInRedirect() {
+  const navigate = useNavigate();
   const [step, setStep] = useState<Step>('PENDING');
   useEffect(() => {
     // 이메일 링크를 사용한 로그인 링크인지 확인
@@ -21,6 +23,8 @@ function SignInRedirect() {
       // Get the email if available. This should be available if the user completes
       // the flow on the same device where they started it.
       let email = window.localStorage.getItem('emailForSignIn');
+      // const isAnotherBrower = Boolean(email);
+      const isAnotherBrower = true;
       if (!email) {
         // User opened the link on a different device. To prevent session fixation
         // attacks, ask the user to provide the associated email again. For example:
@@ -37,6 +41,10 @@ function SignInRedirect() {
           // You can check if the user is new or existing:
           // result.additionalUserInfo.isNewUser
           setStep('COMPLETE');
+
+          if (isAnotherBrower) {
+            navigate('/', { replace: true });
+          }
         })
         .catch((error) => {
           // Some error occurred, you can inspect the code: error.code
