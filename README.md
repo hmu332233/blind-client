@@ -28,3 +28,8 @@
 AuthContext: user, signin, signout을 관리
 RequireAuth: user가 없으면 (로그인이 안되어있으면) /signin 페이지로 redirect
 ```
+
+
+### logo
+
+<a href="https://www.flaticon.com/free-icons/online-community" title="online community icons">Online community icons created by Freepik - Flaticon</a>
