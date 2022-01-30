@@ -23,7 +23,7 @@ function SignInRedirect() {
       // Get the email if available. This should be available if the user completes
       // the flow on the same device where they started it.
       let email = window.localStorage.getItem('emailForSignIn');
-      const isAnotherBrower = Boolean(email);
+      const isAnotherBrower = !Boolean(email);
       if (!email) {
         // User opened the link on a different device. To prevent session fixation
         // attacks, ask the user to provide the associated email again. For example:

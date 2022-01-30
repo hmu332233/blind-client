@@ -23,7 +23,7 @@ function MainPage() {
       id: `p_${Date.now()}`,
       contents: value,
       creatorId: user.id,
-      creatorName: '아무거나',
+      creatorName: user.displayName || '익명',
       createdAt: Date.now(),
     };
 
