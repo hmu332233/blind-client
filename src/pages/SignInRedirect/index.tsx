@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { auth } from '../../utils/firebase/firebase';
-import { isSignInWithEmailLink, signInWithEmailLink } from 'firebase/auth';
+import { isSignInWithEmailLink, signInWithEmailLink, updateProfile, getAdditionalUserInfo, AdditionalUserInfo } from 'firebase/auth';
 
 const STEP_TEXT = {
   PENDING: <>로그인 중..</>,
@@ -23,8 +23,7 @@ function SignInRedirect() {
       // Get the email if available. This should be available if the user completes
       // the flow on the same device where they started it.
       let email = window.localStorage.getItem('emailForSignIn');
-      // const isAnotherBrower = Boolean(email);
-      const isAnotherBrower = true;
+      const isAnotherBrower = Boolean(email);
       if (!email) {
         // User opened the link on a different device. To prevent session fixation
         // attacks, ask the user to provide the associated email again. For example:
@@ -32,7 +31,7 @@ function SignInRedirect() {
       }
       // The client SDK will parse the code from the link for you.
       signInWithEmailLink(auth, email as string, window.location.href)
-        .then((result) => {
+        .then(async (result) => {
           // Clear email from storage.
           window.localStorage.removeItem('emailForSignIn');
           // You can access the new user via result.user
@@ -41,6 +40,13 @@ function SignInRedirect() {
           // You can check if the user is new or existing:
           // result.additionalUserInfo.isNewUser
           setStep('COMPLETE');
+
+          const additionalUserInfo = getAdditionalUserInfo(result) as AdditionalUserInfo;
+          if (additionalUserInfo.isNewUser) {
+            const name = window.prompt('첫 로그인이시군요!\n닉네임을 입력해주세요.');
+            await updateProfile(result.user, { displayName: name });
+          }
+
 
           if (isAnotherBrower) {
             navigate('/', { replace: true });
