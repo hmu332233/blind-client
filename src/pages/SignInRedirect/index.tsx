@@ -52,7 +52,7 @@ function SignInRedirect() {
           console.error({ ...error });
         });
     }
-  }, []);
+  }, [navigate]);
 
   return (
     <div className="text-center">
