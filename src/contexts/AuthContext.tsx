@@ -16,26 +16,17 @@ type AuthActionType = {
   signout: () => void;
 };
 
-export const AuthStateContext = createContext<User>(null!);
+export const AuthStateContext = createContext<Boolean>(false);
 export const AuthActionContext = createContext<AuthActionType>(null!);
 
 type AuthProviderProps = { children: React.ReactNode };
 export function AuthProvider({ children }: AuthProviderProps) {
   const [init, setInit] = useState(false);
-  const [user, setUser] = useState<any>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-      console.log(firebaseUser);
-      if (firebaseUser) {
-        const user = {
-          id: firebaseUser.uid,
-          displayName: firebaseUser.displayName,
-        };
-        setUser(user);
-      } else {
-        setUser(null);
-      }
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsLoggedIn(Boolean(user));
       setInit(true);
     });
     return unsubscribe;
@@ -70,7 +61,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   return (
     <AuthActionContext.Provider value={action}>
-      <AuthStateContext.Provider value={user}>{children}</AuthStateContext.Provider>
+      <AuthStateContext.Provider value={isLoggedIn}>{children}</AuthStateContext.Provider>
     </AuthActionContext.Provider>
   );
 }

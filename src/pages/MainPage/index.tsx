@@ -3,27 +3,30 @@ import React, { useState, useContext, useRef } from 'react';
 import PostCardList from '../../components/PostCardList';
 import PostInput from '../../components/PostInput';
 
-import { AuthStateContext, AuthActionContext } from '../../contexts/AuthContext';
+import { AuthActionContext } from '../../contexts/AuthContext';
 
 import { addDoc, getDocs, query, orderBy, limit, startAfter, QueryDocumentSnapshot } from "firebase/firestore";
 
-import { postsRef } from '../../utils/firebase/firebase';
+import { auth, postsRef } from '../../utils/firebase/firebase';
 import LoadingBox from '../../components/LoadingBox';
 
 
 function MainPage() {
-  const user = useContext(AuthStateContext);
   const { signout } = useContext(AuthActionContext);
   const [posts, setPosts] = useState<Post[]>([]);
   const lastPostSnapshot = useRef<QueryDocumentSnapshot>();
   const [isLast, setIsLast] = useState(false);
 
   const handleSubmit = async (value: string) => {
+    if (!auth.currentUser) {
+      return;
+    }
+
     const post: Post = {
       id: `p_${Date.now()}`,
       contents: value,
-      creatorId: user.id,
-      creatorName: user.displayName || '익명',
+      creatorId: auth.currentUser.uid,
+      creatorName: auth.currentUser.displayName || '-',
       createdAt: Date.now(),
     };
 
